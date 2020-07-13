@@ -62,19 +62,19 @@ Agora podemos fazer o procedimento de desenho
 ```python
 # Linha de baixo
 t.fd(distancia)
-t.lt(distancia)
+t.lt(90)
 
 # Linha da esquerda
 t.fd(distancia)
-t.lt(distancia)
+t.lt(90)
 
 # Linha de cima
 t.fd(distancia)
-t.lt(distancia)
+t.lt(90)
 
 # Linha da direita
 t.fd(distancia)
-t.lt(distancia)
+t.lt(90)
 ```
 
 A repetição destes passos pode ser resumida com laços de repetição
@@ -85,7 +85,7 @@ Utilizando o FOR
 ```python
 for i in range(4):
   t.fd(distancia)
-  t.lt(distancia)
+  t.lt(90)
 ```
 
 Utilizando o WHILE
@@ -94,9 +94,57 @@ Utilizando o WHILE
 i = 0
 while i<4:
   t.fd(distancia)
-  t.lt(distancia)
+  t.lt(90)
   i = i + 1
 ```
+
+Podemos utilizar as funçoes para "empacotar" estes comandos, evitando a necessidade de repetir o código todas as vezes que quisermos desenhar um quadrado.
+
+```python
+def quadrado():
+  for i in range(4):
+    t.fd(distancia)
+    t.lt(90)
+ ```
+ 
+ Para chamar uma função, basta chamar o nome dela
+```python
+quadrado()
+```
+É possivel passar argumentos para as funções, tornando o códiugo ainda mais flexivel.
+Um exemplo de parâmetro que pode ser passado é a distância (que chamaremos de tamanho), permitindo que possamos criar quadrados de tamanhos diferentes.
+
+
+```python
+def quadrado(tamanho):
+  for i in range(4):
+    t.fd(tamanho)
+    t.lt(90)
+ 
+quadrado(10)
+quadrado(20)
+quadrado(50)
+ ```
+
+Para desenhar quadrados em posições específicas, devemos passar as coordenadas para a função, e cuidar para levantar a caneta antes de mover o cursor.
+
+
+```python
+def quadrado(tamanho, x, y):
+  t.penup()
+  t.goto(x, y)
+  t.pendown()
+  for i in range(4):
+    t.fd(tamanho)
+    t.lt(90)
+
+quadrado(20, 0, 0)
+quadrado(20, 30, 0)
+quadrado(20, 30, 30)
+quadrado(20, 0, 30)
+quadrado(70, -10, -10)
+```
+
 
 ## Exemplo 2 - Carregando dados e plotando gráficos
 
