@@ -148,4 +148,47 @@ quadrado(70, -10, -10)
 
 ## Exemplo 2 - Carregando dados e plotando gráficos
 
-Os dados de consumo de energia foram extraídos de https://dados.fee.tche.br
+Os dados de consumo de energia utilizados neste exemplo foram extraídos de https://dados.fee.tche.br
+
+A linguagem python é bastante utilizada para ánálise de dados, então vamos buscar dados sobre consumo de energia nas cidades do estado
+do Rio Grande do Sul e vamos comparar o consumo industrial e comercial com o consumo residêncial por município.
+
+A biblioteca [pandas](https://pandas.pydata.org) é bastante utilizada para trabalhar com dados tabulares, assim como o Excel. Vamos utilizar esta biblioteca para poder manipular os dados com mais facilidade. Além desta biblioteca, utilizaremos a matplotlib, que será responsável por gerar gráficos dos nossos dados.
+
+```python
+import pandas as pd
+import matplotlib.pyplot as plt
+```
+
+Os dados a serem importados estão no formato CSV (Comma Separated Values) e estão disponíveis neste repositório na pasta "energia_rs". É possível realizar o download dos arquivos, ou importar diretamente da internet.
+
+```python
+# Salvando o endereço do arquivo na variável URL
+url ="https://github.com/armandokeller/conecta_202001/raw/master/energia_rs/energia_residencial.csv"
+
+# Importando para a variável df_residencial
+df_residencial = pd.read_csv(url,sep=";",encoding="ISO-8859-1",skiprows=6,index_col="Município")
+
+# Gerando a lista com todos os anos disponíveis (de 1991 até 2018)
+anos = list(df_residencial.columns)
+
+# Realizando a transposição dos dados para que os municípios sejam as colunas e os anos as linhas
+df_residencial = df_residencial.transpose()
+
+# Criando a lista de cidades
+cidades = list(df_residencial.columns)
+```
+
+O mesmo procedimento é realizado para o consumo industrial e comercial, agora sem a necessidade de criar a lista de anos disponíveis e de cidades, pois estas já foram criadas.
+
+```python
+# Dados industriais
+url ="https://github.com/armandokeller/conecta_202001/raw/master/energia_rs/energia_industrial.csv"
+df_industrial = pd.read_csv(url,sep=";",encoding="ISO-8859-1",skiprows=6,index_col="Município")
+df_industrial = df_industrial.transpose()
+
+# Dados comerciais
+url ="https://github.com/armandokeller/conecta_202001/raw/master/energia_rs/energia_comercial.csv"
+df_comercial = pd.read_csv(url,sep=";",encoding="ISO-8859-1",skiprows=6,index_col="Município")
+df_comercial = df_comercial.transpose()
+```
