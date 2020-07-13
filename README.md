@@ -192,3 +192,49 @@ url ="https://github.com/armandokeller/conecta_202001/raw/master/energia_rs/ener
 df_comercial = pd.read_csv(url,sep=";",encoding="ISO-8859-1",skiprows=6,index_col="Município")
 df_comercial = df_comercial.transpose()
 ```
+
+Com estas "planilhas" que agora são chamadas de DataFrames, podemos gerar os gráficos.
+
+Como temos muitas cidades, vamos armazenar em uma variável o nome da cidade que queremos os gráficos. Esta variável servirá para filtrar os dados, e como informação nos gráficos. É importante que a grafia seja a mesma do que a contida no arquivo que foi carregado, neste caso, todas iniciando com letras maiúsculas seguidas de letras minúsculas e considerando a acentuação.
+
+```python
+cidade = "São Leopoldo"
+```
+ Para o nosso primeiro gráfico, vamos gerar três linhas, uma para o consumo residencial, outra para o industrial e outra para o comercial.
+ ```python
+plt.plot(anos, df_residencial[cidade], label="Residencial")
+plt.plot(anos, df_industrial[cidade], label="Industrial")
+plt.plot(anos, df_comercial[cidade], label="Comercial")
+``` 
+Em seguida, inserimos mais detalhes do gráfico, como nome dos eixos, título, legenda e grade.
+```python
+# Ativa a exibição da legenda
+plt.legend()
+
+# Define o nome do eixo vertical
+plt.ylabel("Energia [MWh]")
+
+# Define o nome do eixo horizontal
+plt.xlabel("Ano")
+
+# Define o título do gráfico com o nome da cidade
+plt.title(f"Consumo de energia em {cidade} - RS") 
+
+# Habilita a grade (grid)
+plt.grid(True)
+```
+Até este momento só configuramos o gráfico, nada é exibido.
+No momento que o gráfico for exibido, a execução do código será interrompida até que a janela com o gráfico seja fechada.
+
+```python
+plt.plot()
+```
+
+Agora podemos ir para o nosso segundo gráfico, onde realizaremos a comparação do cosumo industrial somado com o consumo comercial em relação ao consumo residencial.
+```python
+plt.plot(anos, (df_industrial[cidade]+df_comercial[cidade])/df_residencial[cidade])
+plt.title("Relação entre consumo comercial e industrial pelo residêncial")
+plt.grid(True)
+plt.show()
+```
+A partir daqui podem ser realizadas diversas análises com estes dados.
