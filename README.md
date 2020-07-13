@@ -238,3 +238,16 @@ plt.grid(True)
 plt.show()
 ```
 A partir daqui podem ser realizadas diversas análises com estes dados.
+
+## Continue
+
+A linguagem python pode ser aplicada em diversas áreas, principalmente para automatizar tarefas repetitivas.
+
+#### Dados abertos
+Links para dados abertos:
+  - [FEE - Fundação de Economia e Estatística Siegfried Emanuel Heuser](https://dados.fee.tche.br)
+  - [Dados RS](https://dados.rs.gov.br/dataset)
+  - [Portal Brasileiro de Dados Abertos](http://dados.gov.br/)
+
+
+  
